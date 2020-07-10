@@ -7,19 +7,27 @@
 </head>
 <body>
     <div id="app">
-        <static-posts />
+        <router-view />
     </div>
-    <template id="static-posts-template">
-        <div>
-            <h1>Here are the post titles:</h1>
-            <ul>
-                <li v-for="post in posts">
+    <template id="list-template">
+        <ul>
+            <li v-for="post in posts">
+                <router-link :to="{ name: 'post', params: {id: post.id}}">
                     {{ post.title }}
-                </li>
-            </ul>
+                </router-link>
+            </li>
+        </ul>
+    </template>
+    <template id="post-template">
+        <div>
+            <router-link :to="{name: 'homepage'}">Homepage</router-link>
+            <h3>{{ post.title }}</h3>
+            {{post.body}}
         </div>
     </template>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.3/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.5.3/vue-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.1/axios.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
