@@ -1,42 +1,10 @@
-/*Vue.component('static-posts', {
-
-    template: '#static-posts-template',
-
-    data: () => ({
-        posts: []
-    }),
-
-    mounted(){
-        this.getPosts();
-    },
-
-    methods: {
-        getPosts(){
-            this.posts = [
-                {
-                    "title": "The first post title"
-                },
-                {
-                    "title": "The second post title"
-                },
-                {
-                    "title": "The third post title"
-                }
-            ];
-        }
-    }
-});
-
-new Vue({
-    el: '#app'
-});  */
-
 const baseUrl = "http://jsonplaceholder.typicode.com";
 
 const List = {
     template: '#list-template',
     data: () => ({
-        posts: []
+        posts: [],
+        search: ""
     }),
     mounted(){
         this.getPosts();
@@ -49,6 +17,13 @@ const List = {
                 }).catch(error => {
                     console.log(error);
                 })
+        }
+    },
+    computed:{
+        filteredPosts() {
+            return this.posts.filter(post => {
+                return post.title.includes(this.search);
+            })
         }
     }
 };
